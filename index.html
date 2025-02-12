@@ -15,6 +15,11 @@
             text-align: center;
         }
 
+        /* Make elements responsive */
+        h1, h2, button {
+            font-size: calc(1rem + 1vw);
+        }
+
         /* Tap to Start Screen */
         .start-screen {
             position: fixed;
@@ -25,11 +30,12 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            padding: 10px;
         }
 
         .start-screen button {
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 10px 5vw;
+            font-size: 1.2em;
             background: red;
             color: white;
             border: none;
@@ -43,7 +49,7 @@
             top: 30%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 24px;
+            font-size: calc(1rem + 0.5vw);
             font-weight: bold;
             white-space: nowrap;
             overflow: hidden;
@@ -51,6 +57,7 @@
             width: 0;
             animation: typing 5s steps(40, end) forwards, blink 0.8s infinite;
             display: none;
+            max-width: 90%;
         }
 
         @keyframes typing {
@@ -62,31 +69,6 @@
             50% { border-color: transparent }
         }
 
-        /* Heart Animation */
-        .heart {
-            position: absolute;
-            color: red;
-            font-size: 20px;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
-
-        /* Flashing Background */
-        .flash {
-            animation: flash 0.5s alternate infinite;
-        }
-
-        @keyframes flash {
-            0% { background: black; }
-            100% { background: red; }
-        }
-
         /* Popup */
         .popup {
             position: fixed;
@@ -95,18 +77,22 @@
             transform: translate(-50%, -50%);
             background: white;
             color: black;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             display: none;
             text-align: center;
+            width: 80%;
+            max-width: 400px;
         }
 
         .popup button {
             margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 10px 5vw;
+            font-size: 1.2em;
             border: none;
             cursor: pointer;
+            width: 40%;
+            max-width: 150px;
         }
 
         .yes-btn {
@@ -118,23 +104,16 @@
             background: red;
             color: white;
         }
-
     </style>
 </head>
 <body>
-
-    <!-- Tap to Start Screen -->
     <div class="start-screen" id="startScreen">
         <h1>❤️ Tap to Begin ❤️</h1>
         <button onclick="startExperience()">Start</button>
     </div>
 
-    <audio id="romanticMusic" loop>
-        <source src="your-romantic-song.mp3" type="audio/mp3">
-    </audio>
-
     <div class="message-container" id="message">
-        YOO what's up SHAWTY!! lol Anyways i love you to the moon and back and all that sentimental stuff..
+        YOO what's up SHAWTY!! lol Anyways I love you to the moon and back and all that sentimental stuff..
     </div>
 
     <div class="popup" id="popup">
@@ -146,37 +125,16 @@
     <script>
         function startExperience() {
             document.getElementById("startScreen").style.display = "none";
-            document.getElementById("romanticMusic").play();
-            startFallingHearts();
             setTimeout(() => {
                 document.getElementById("message").style.display = "block";
                 setTimeout(() => {
-                    document.body.classList.add("flash");
-                    setTimeout(() => {
-                        document.getElementById("popup").style.display = "block";
-                        document.body.classList.remove("flash");
-                    }, 3000);
-                }, 6000);
-            }, 1000);
-        }
-
-        function startFallingHearts() {
-            setInterval(() => {
-                let heart = document.createElement("div");
-                heart.innerHTML = "❤️";
-                heart.classList.add("heart");
-                heart.style.left = Math.random() * window.innerWidth + "px";
-                heart.style.top = "-20px";
-                heart.style.fontSize = Math.random() * 30 + 10 + "px";
-                heart.style.animationDuration = Math.random() * 3 + 2 + "s";
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 5000);
-            }, 300);
+                    document.getElementById("popup").style.display = "block";
+                }, 5000);
+            }, 2000);
         }
 
         function acceptProposal() {
-            let proposalMessage = "yeahh you better not click no welcome to death row! ❤️"; // Change this text
-            document.getElementById("popup").innerHTML = `<h2>${proposalMessage}</h2>`;
+            document.getElementById("popup").style.display = "none";
         }
 
         function rejectProposal() {
@@ -186,7 +144,5 @@
             btn.style.top = Math.random() * 80 + "vh";
         }
     </script>
-
-
 </body>
 </html>
